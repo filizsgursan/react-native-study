@@ -1,21 +1,28 @@
-import { View, Text } from 'react-native'
+// React
 import React, { useEffect, useLayoutEffect, useState } from 'react'
-import { Image, ScrollView } from 'native-base';
-import { HStack } from 'native-base';
-import { styles } from './ProductCardDetailStyle';
-import { TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { useDispatch, useSelector } from 'react-redux';
-import { cartCount } from '../../redux/slices/cartSlice';
+
+// React Native
+import { View, Text, TouchableOpacity } from 'react-native'
+import { Image, ScrollView, HStack } from 'native-base'
+
+// Style
+import { styles } from './ProductCardDetailStyle'
+
+// Navigation
+import { useNavigation } from '@react-navigation/native'
+
+// Redux
+import { useDispatch, useSelector } from 'react-redux'
+import { cartCount } from '../../redux/slices/cartSlice'
 
 export default function ProductCardDetail({
     route
 }) {
 
-    const [data, setData] = useState()
-
     const dispatch = useDispatch()
     const navigation = useNavigation()
+
+    const [data, setData] = useState()
 
     const cartTotalCount = useSelector(
         (state) => state.cartTotalCount.cartCount
@@ -58,7 +65,7 @@ export default function ProductCardDetail({
             </Text>
 
             <HStack style={styles.infoRow}>
-                <HStack style={styles.sellerInfo}>
+                <HStack style={styles.brandInfo}>
                     <Text style={{ fontSize: 14 }}>
                         Brand:
                     </Text>
@@ -78,7 +85,7 @@ export default function ProductCardDetail({
             </HStack>
 
             <HStack style={styles.infoRow}>
-                <HStack style={styles.sellerInfo}>
+                <HStack style={styles.brandInfo}>
                     <Text style={{ fontSize: 14 }}>
                         Model:
                     </Text>
@@ -98,7 +105,16 @@ export default function ProductCardDetail({
             </HStack>
 
             <TouchableOpacity
-                style={{ backgroundColor: "#2A59FE", height: 45, width: "100%", justifyContent: "center", alignSelf: "center", borderRadius: 8, marginTop: 16, marginBottom: 16 }}
+                style={{
+                    backgroundColor: "#2A59FE",
+                    height: 45,
+                    width: "100%",
+                    justifyContent: "center",
+                    alignSelf: "center",
+                    borderRadius: 8,
+                    marginTop: 16,
+                    marginBottom: 16
+                }}
                 activeOpacity={0.9}
                 onPress={() => handleOnAddToCart()}
             >

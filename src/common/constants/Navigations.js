@@ -15,7 +15,6 @@ export const HOME_NAV = {
     FAVORITES: "Favorites",
     CART: "Cart",
     PRODUCT_DETAIL:"ProductDetailPage",
-    ADD_TO_CAARD:"AddToCard"
 };
 
 export const CART_NAV = {

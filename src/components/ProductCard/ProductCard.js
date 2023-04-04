@@ -1,14 +1,21 @@
-import { View, Text } from 'react-native'
+// React
 import React from 'react'
-import { TouchableOpacity } from 'react-native'
-import { Box, Image } from "native-base";
-import { styles } from './ProductCardStyle';
-import { PixelRatio } from 'react-native';
-import { Icon } from 'react-native-elements';
-import { useNavigation } from '@react-navigation/native';
-import { HOME_NAV } from '../../common/constants/Navigations';
-import { useDispatch, useSelector } from 'react-redux';
-import { cartCount } from '../../redux/slices/cartSlice';
+
+// React Native
+import { View, Text, TouchableOpacity, PixelRatio } from 'react-native'
+import { Box, Image } from "native-base"
+import { Icon } from 'react-native-elements'
+
+// Styles
+import { styles } from './ProductCardStyle'
+
+// Navigation
+import { useNavigation } from '@react-navigation/native'
+import { HOME_NAV } from '../../common/constants/Navigations'
+
+// Redux
+import { useDispatch, useSelector } from 'react-redux'
+import { cartCount } from '../../redux/slices/cartSlice'
 
 
 export default function ProductCard({
@@ -73,11 +80,24 @@ export default function ProductCard({
             </TouchableOpacity>
 
             <TouchableOpacity
-                style={{ backgroundColor: "#2A59FE", height: 36, width: "100%", justifyContent: "center", alignSelf: "center", borderRadius: 4 }}
+                style={{
+                    backgroundColor: "#2A59FE",
+                    height: 36,
+                    width: "100%",
+                    justifyContent: "center",
+                    alignSelf: "center",
+                    borderRadius: 4
+                }}
                 activeOpacity={0.7}
                 onPress={() => handleOnAddToCart()}
             >
-                <Text style={{ textAlign: "center", color: "#FFFFFF", fontSize: 16, lineHeight: 19.5 }}>
+                <Text
+                    style={{
+                        textAlign: "center",
+                        color: "#FFFFFF",
+                        fontSize: 16,
+                        lineHeight: 19.5
+                    }}>
                     Add to Cart
                 </Text>
 

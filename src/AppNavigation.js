@@ -1,4 +1,3 @@
-import { View, Text } from 'react-native'
 import React from 'react'
 
 // Stack navigator
@@ -14,7 +13,6 @@ export default function AppNavigation() {
                 headerBackTitle: "Back",
                 headerShown: false,
                 headerTitleAlign: "center",
-                // headerStyle: { backgroundColor: "#9d9d9d" },
             }}
         >
             {appRoutes.map((item, index) => {

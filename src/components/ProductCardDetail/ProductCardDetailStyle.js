@@ -35,10 +35,6 @@ export const styles = StyleSheet.create({
         marginVertical: 4,
         color: "#323338",
     },
-    textBlue: {
-        marginLeft: 2,
-        color: "#45a2e5",
-    },
     dataName: {
         fontStyle: "normal",
         fontWeight: "normal",
@@ -68,7 +64,7 @@ export const styles = StyleSheet.create({
         marginTop: 3,
         marginBottom: 2,
     },
-    sellerInfo: {
+    brandInfo: {
         flex: 2,
     },
     textBlue: {

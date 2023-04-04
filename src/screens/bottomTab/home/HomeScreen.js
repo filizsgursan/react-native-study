@@ -1,22 +1,35 @@
-import { View, Text, ActivityIndicator } from 'react-native'
-import React, { useCallback, useEffect, useLayoutEffect } from 'react'
-import { useFocusEffect, useNavigation } from '@react-navigation/native'
-import { useDispatch, useSelector } from 'react-redux';
-import { setProductsData } from '../../../redux/slices/productsSlice';
-import ProductCard from '../../../components/ProductCard/ProductCard';
-import { VStack, FlatList } from "native-base";
-import { Dimensions } from 'react-native';
-import { Icon, SearchBar } from 'react-native-elements';
-import { Platform } from 'react-native';
-import { useState } from 'react';
-import { KeyboardAvoidingView } from 'react-native';
-import { TouchableOpacity } from 'react-native';
+// React
+import React, { useEffect, useLayoutEffect, useState } from 'react'
+
+// React Native
+import {
+  View,
+  Text,
+  ActivityIndicator,
+  Dimensions,
+  Platform,
+  KeyboardAvoidingView,
+  TouchableOpacity
+}
+  from 'react-native'
+import { VStack, FlatList } from "native-base"
+import { Icon, SearchBar } from 'react-native-elements'
+
+// Navigation
+import { useNavigation } from '@react-navigation/native'
+
+// Redux
+import { useDispatch, useSelector } from 'react-redux'
+import { setProductsData } from '../../../redux/slices/productsSlice'
+
+// Components
+import ProductCard from '../../../components/ProductCard/ProductCard'
 
 export default function HomeScreen() {
 
   const navigation = useNavigation()
-
   const dispatch = useDispatch()
+
   const [search, setSearch] = useState("")
   const [data, setData] = useState("")
   const [isLoading, setIsLoading] = useState(false);
@@ -92,9 +105,23 @@ export default function HomeScreen() {
         />
       </VStack>
 
-      <VStack style={{ paddingHorizontal: 16, marginTop: 19, flexDirection: "row", justifyContent: "space-between", alignItems: "center", }}>
+      <VStack
+        style={{
+          paddingHorizontal: 16,
+          marginTop: 19,
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center"
+        }}>
 
-        <Text style={{ fontSize: 18, lineHeight: 21.94, alignItems: "center" }}>Filters:</Text>
+        <Text
+          style={{
+            fontSize: 18,
+            lineHeight: 21.94,
+            alignItems: "center"
+          }}>
+          Filters:
+        </Text>
 
         <TouchableOpacity
           style={{
@@ -107,7 +134,15 @@ export default function HomeScreen() {
           }}
           activeOpacity={0.9}
         >
-          <Text style={{ fontSize: 14, lineHeight: 17.07, textAlignVertical: "center", color: "#000000" }}>Select Filter</Text>
+          <Text
+            style={{
+              fontSize: 14
+              , lineHeight: 17.07,
+              textAlignVertical: "center",
+              color: "#000000"
+            }}
+          >Select Filter
+          </Text>
 
         </TouchableOpacity>
       </VStack>
@@ -123,8 +158,10 @@ export default function HomeScreen() {
 
         renderItem={({ item }) => {
           return (
-            <KeyboardAvoidingView keyboardVerticalOffset={350} behavior={"position"}>
-
+            <KeyboardAvoidingView
+              keyboardVerticalOffset={350}
+              behavior={"position"}
+            >
               <ProductCard
                 product={item}
                 isProductsContent={true}

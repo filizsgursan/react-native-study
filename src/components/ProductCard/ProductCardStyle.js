@@ -13,14 +13,14 @@ export const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: "rgba(0, 0, 0, 0.1)",
         backgroundColor: "#FFFFFF",
-        padding:10
+        padding: 10
 
     },
     imageContainer: {
         width: "100%",
         aspectRatio: 1,
         backgroundColor: "#FFFFFF",
-        overflow: "hidden"        
+        overflow: "hidden"
     },
     image: {
         width: "100%",
@@ -59,13 +59,6 @@ export const styles = StyleSheet.create({
     priceCurrency: {
         marginRight: 2,
     },
-    priceTextBold: {
-        flex: 1,
-        fontSize: 14,
-        lineHeight: 16,
-        fontWeight: "bold",
-    },
-
     likeButton: {
         position: "absolute",
         top: 10,
@@ -78,35 +71,5 @@ export const styles = StyleSheet.create({
         paddingLeft: 5,
         borderRadius: 6,
         backgroundColor: "#ffffff",
-    },
-    discountContainer: {
-        height: 25,
-        width: "100%",
-        borderRadius: 5,
-        marginBottom: 10,
-        backgroundColor: "#D0261C",
-    },
-    noDiscountContainer: {
-        height: 25,
-        width: "100%",
-        borderRadius: 5,
-        marginBottom: 10,
-        backgroundColor: "#ffffff",
-    },
-    discountContainerText: {
-        textAlign: "center",
-        color: "#ffffff",
-    },
-
-    loadingContainer: {
-        position: "absolute",
-        width: screenWidth / 2 - 20,
-        height: screenHeight / 2 - 55,
-        alignItems: "center",
-        justifyContent: "center",
-        opacity: 0.8,
-        backgroundColor: "#DADADA",
-        zIndex: 19,
-        borderRadius: 8,
-    },
+    }
 });

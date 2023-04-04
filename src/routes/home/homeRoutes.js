@@ -1,7 +1,6 @@
 
 // Constants
 import { HOME_NAV } from '../../common/constants/Navigations'
-import AddToCard from '../../components/AddToCard/AddToCard';
 import ProductCardDetail from '../../components/ProductCardDetail/ProductCardDetail';
 import CartScreen from '../../screens/bottomTab/home/cart/CartScreen';
 
