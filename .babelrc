@@ -1,0 +1,21 @@
+{
+    "plugins": [
+        [
+            "module-resolver",
+            {
+                "root": [
+                    "./src"
+                ],
+                "alias": {                   
+                    //Src     
+                    "@helpers": "./src/helpers",                                       
+                    "@routes": "./src/routes",
+                    "@common": "./src/common",
+                    "@constants": "./src/common/constants/",
+                    "@slices": "./src/redux/slices",
+                    "@redux": "./src/redux"
+                }
+            }
+        ]
+    ]
+}
