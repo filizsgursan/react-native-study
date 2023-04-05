@@ -1,5 +1,5 @@
 // React
-import React from 'react'
+import React, { useState } from 'react'
 
 // React Native
 import { View, Text, TouchableOpacity, PixelRatio } from 'react-native'
@@ -15,28 +15,33 @@ import { HOME_NAV } from '../../common/constants/Navigations'
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { cartCount } from '../../redux/slices/cartSlice'
-
+import { cartCount, setAddedProduct } from '../../redux/slices/cartSlice'
 
 export default function ProductCard({
     product, style
 }) {
 
     const navigation = useNavigation()
-
     const dispatch = useDispatch()
 
+    const [favorite, setFavorite] = useState(false)
+
     const cartTotalCount = useSelector(
-        (state) => state.cartTotalCount.cartCount
+        (state) => state.cart?.cartCount
     );
 
     const goToProductDetailPage = (product) => {
-        navigation.navigate(HOME_NAV.PRODUCT_DETAIL, { item: product, initial: false })
+        navigation.navigate(HOME_NAV.PRODUCT_DETAIL, { item: product, initial: false, isFav: favorite })
     }
 
     const handleOnAddToCart = () => {
         dispatch(cartCount(cartTotalCount + 1))
         navigation.navigate(HOME_NAV.CART, { item: product, initial: false })
+        dispatch(setAddedProduct(product))
+    }
+
+    const handleOnLikeFavPress = () => {
+        setFavorite(!favorite)
     }
 
     return (
@@ -69,13 +74,25 @@ export default function ProductCard({
             <TouchableOpacity
                 style={styles.likeButton}
                 activeOpacity={0.9}
+                onPress={handleOnLikeFavPress}
             >
-                <Icon
-                    name="star-o"
-                    type="font-awesome"
-                    size={16}
-                    color="#D9D9D9"
-                />
+                {
+
+                    favorite ?
+                        <Icon
+                            name="star"
+                            type="font-awesome"
+                            size={16}
+                            color="#FFB800"
+                        />
+                        :
+                        <Icon
+                            name="star-o"
+                            type="font-awesome"
+                            size={16}
+                            color="#D9D9D9"
+                        />
+                }
 
             </TouchableOpacity>
 

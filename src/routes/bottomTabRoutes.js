@@ -48,7 +48,7 @@ export default bottomTabRoutes = [
                     }
                     BadgeElement={
                         <Text style={{ color: 'white', fontSize: 10, textAlign: "center" }}>
-                            {useSelector((state) => state.cartTotalCount.cartCount)}
+                            {useSelector((state) => state.cart.cartCount)}
                         </Text>
                     }
                     IconBadgeStyle={
@@ -58,7 +58,7 @@ export default bottomTabRoutes = [
                             backgroundColor: 'red'
                         }
                     }
-                    Hidden={useSelector((state) => state.cartTotalCount.cartCount) === 0}
+                    Hidden={useSelector((state) => state.cart.cartCount) === 0}
 
                 />
             )

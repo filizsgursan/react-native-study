@@ -12,11 +12,13 @@ export default function FavoritesNavigation() {
         <Stack.Navigator
             screenOptions={{                
                 headerBackTitle: "Back",
-                headerShown: false,
+                headerShown: true,
                 headerTitleAlign: "center",              
                 tabBarActiveTintColor: 'black',
                 tabBarShowLabel: true,
                 tabBarHideOnKeyboard: true,
+                headerStyle: { backgroundColor: "#2A59FE" },
+                headerTintColor: '#FFFFFF'
             }}
         >
             {

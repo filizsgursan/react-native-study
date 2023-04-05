@@ -16,10 +16,11 @@ export default function ProfileNavigation() {
                 headerBackTitle: "Back",
                 headerShown: true,
                 headerTitleAlign: "center",
-                headerTintColor: "white",
-                // headerStyle: { backgroundColor: "#D0261C" },
-                headerShadowVisible: false,
-                headerBackTitleVisible: false,
+                tabBarActiveTintColor: 'black',
+                tabBarShowLabel: true,
+                tabBarHideOnKeyboard: true,
+                headerStyle: { backgroundColor: "#2A59FE" },
+                headerTintColor: '#FFFFFF'
             }}
         >
             {

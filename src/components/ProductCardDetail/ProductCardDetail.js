@@ -3,7 +3,8 @@ import React, { useEffect, useLayoutEffect, useState } from 'react'
 
 // React Native
 import { View, Text, TouchableOpacity } from 'react-native'
-import { Image, ScrollView, HStack } from 'native-base'
+import { Icon } from 'react-native-elements'
+import { Image, ScrollView } from 'native-base'
 
 // Style
 import { styles } from './ProductCardDetailStyle'
@@ -13,7 +14,10 @@ import { useNavigation } from '@react-navigation/native'
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux'
-import { cartCount } from '../../redux/slices/cartSlice'
+import { cartCount, setAddedProduct } from '../../redux/slices/cartSlice'
+
+// Navigations
+import { HOME_NAV } from '../../common/constants/Navigations'
 
 export default function ProductCardDetail({
     route
@@ -23,13 +27,18 @@ export default function ProductCardDetail({
     const navigation = useNavigation()
 
     const [data, setData] = useState()
+    const [isFav, setIsFav] = useState(false)
+    const handleOnLikeFavPress = () => {
+        setIsFav(!isFav)
+    }
 
     const cartTotalCount = useSelector(
-        (state) => state.cartTotalCount.cartCount
-    );
+        (state) => state.cart.cartCount
+    )
 
     useEffect(() => {
         setData(route?.params?.item)
+        setIsFav(route?.params?.isFav)
     }, [route])
 
     useLayoutEffect(() => {
@@ -41,6 +50,9 @@ export default function ProductCardDetail({
 
     const handleOnAddToCart = () => {
         dispatch(cartCount(cartTotalCount + 1))
+        navigation.navigate(HOME_NAV.CART, { item: data, initial: false })
+
+        dispatch(setAddedProduct(data))
     }
     return (
 
@@ -54,6 +66,41 @@ export default function ProductCardDetail({
                     alt=" "
                 />
 
+                <TouchableOpacity style={{
+                    height: 18,
+                    width: 18,
+                    marginLeft: 4,
+                    position: "absolute",
+                    right: 15,
+                    top: 25
+                }}
+                    activeOpacity={0.9}
+                    onPress={handleOnLikeFavPress}
+                    hitSlop={{
+                        top: 8,
+                        bottom: 8,
+                        left: 5,
+                        right: 5
+                    }}
+                >{
+
+                        isFav ?
+                            <Icon
+                                name="star"
+                                type="font-awesome"
+                                size={16}
+                                color="#FFB800"
+                            />
+                            :
+                            <Icon
+                                name="star-o"
+                                type="font-awesome"
+                                size={16}
+                                color="#D9D9D9"
+                            />
+                    }
+                </TouchableOpacity>
+
             </View>
 
             <Text style={styles.dataName}>
@@ -64,66 +111,65 @@ export default function ProductCardDetail({
                 {data?.description}
             </Text>
 
-            <HStack style={styles.infoRow}>
-                <HStack style={styles.brandInfo}>
-                    <Text style={{ fontSize: 14 }}>
-                        Brand:
-                    </Text>
-                    <TouchableOpacity>
-                        <Text
-                            style={{
-                                fontSize: 14,
-                                marginLeft: 2,
-                                color: "#45a2e5"
-                            }}
-                            numberOfLines={1}
-                        >
-                            {data?.brand}
-                        </Text>
-                    </TouchableOpacity>
-                </HStack>
-            </HStack>
-
-            <HStack style={styles.infoRow}>
-                <HStack style={styles.brandInfo}>
-                    <Text style={{ fontSize: 14 }}>
-                        Model:
-                    </Text>
-                    <TouchableOpacity>
-                        <Text
-                            style={{
-                                fontSize: 14,
-                                marginLeft: 2,
-                                color: "#45a2e5"
-                            }}
-                            numberOfLines={1}
-                        >
-                            {data?.model}
-                        </Text>
-                    </TouchableOpacity>
-                </HStack>
-            </HStack>
-
-            <TouchableOpacity
+            <View
                 style={{
-                    backgroundColor: "#2A59FE",
-                    height: 45,
-                    width: "100%",
-                    justifyContent: "center",
-                    alignSelf: "center",
-                    borderRadius: 8,
-                    marginTop: 16,
-                    marginBottom: 16
+                    flexDirection: "row",
+                    justifyContent: "space-between"
                 }}
-                activeOpacity={0.9}
-                onPress={() => handleOnAddToCart()}
             >
-                <Text style={{ textAlign: "center", color: "#FFFFFF", fontSize: 16, lineHeight: 19.5 }}>
-                    Add to Card
-                </Text>
 
-            </TouchableOpacity>
+                <View
+                    style={{
+                        width: "50%",
+                        alignContent: "center",
+                        justifyContent: "center"
+                    }}>
 
-        </ScrollView >
+                    <Text
+                        style={{
+                            fontSize: 20,
+                            color: "#2A59FE"
+                        }}>
+                        Price:
+                    </Text>
+
+                    <Text
+                        style={{
+                            fontSize: 18,
+                            color: "#000000",
+                            fontWeight: "bold"
+                        }}>
+                        {data?.price} ₺
+                    </Text>
+                </View>
+
+                <TouchableOpacity
+                    style={{
+                        backgroundColor: "#2A59FE",
+                        height: 45,
+                        width: "50%",
+                        justifyContent: "center",
+                        borderRadius: 8,
+                        marginTop: 16,
+                        marginBottom: 16
+                    }}
+                    activeOpacity={0.9}
+                    onPress={() => handleOnAddToCart()}
+                >
+
+                    <Text
+                        style={{
+                            textAlign: "center",
+                            color: "#FFFFFF",
+                            fontSize: 16,
+                            lineHeight: 19.5,
+                            fontWeight: "bold"
+                        }}>
+                        Add to Card
+                    </Text>
+
+                </TouchableOpacity>
+            </View>
+        </ScrollView>
     )
 }

@@ -28,5 +28,8 @@ export const FAV_NAV = {
 };
 
 export const PROFILE_NAV = {
-    PROFILE: "Profile"
+    PROFILE: "Profile",
+    HOME:"Home",
+    CART: "Cart",
+    FAVORITES: "Favorites"
 };

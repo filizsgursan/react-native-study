@@ -30,8 +30,9 @@ export const styles = StyleSheet.create({
     infoContainer: {
         flex: 1,
         flexDirection: "column",
-        marginLeft: 10,
+        paddingHorizontal: 16,
         marginTop: 1.5,
+        marginBottom:10
     },
     infoRow: {
         justifyContent: "space-between",
@@ -45,8 +46,8 @@ export const styles = StyleSheet.create({
         flex: 1,
         fontStyle: "normal",
         fontWeight: "500",
-        fontSize: 16,
-        lineHeight: 19,
+        fontSize: 18,
+        lineHeight: 24,
         color: "#323338",
     },
     brandInfo: {
@@ -86,14 +87,12 @@ export const styles = StyleSheet.create({
     },
     textBlue: {
         marginLeft: 2,
-        color: "#45a2e5",
+        color: "#2A59FE",
     },
     textBold: {
         fontWeight: "bold",
     },
-    textRed: {
-        color: "#D0261C",
-    },
+
     textBlack: {
         color: "#000",
     },
@@ -124,7 +123,7 @@ export const styles = StyleSheet.create({
     },
     addCartButton: {
         height: 27,
-        justifyContent: "center",
+        justifyContent: "center"
     },
     addCartButtonLeft: {
         paddingRight: 12,
@@ -136,10 +135,10 @@ export const styles = StyleSheet.create({
         width: 27,
         height: 27,
         alignItems: "center",
-        justifyContent: "center",
-        borderRadius: 6,
-        borderWidth: 1,
-        borderColor: "#E8E8E8"
+        justifyContent: "center",      
+        width: 50,
+        height: 51,
+        backgroundColor:"#2A59FE",
     },
     inCartNumber: {
         fontStyle: "normal",
@@ -149,8 +148,8 @@ export const styles = StyleSheet.create({
         color: "#D0261C"
     },
     imageContainer: {
-        paddingTop:10,
-        width: 50,       
+        paddingTop: 10,
+        width: 50,
         borderRadius: 6,
     }
 });

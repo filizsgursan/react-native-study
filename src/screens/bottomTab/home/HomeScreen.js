@@ -13,7 +13,7 @@ import {
 }
   from 'react-native'
 import { VStack, FlatList } from "native-base"
-import { Icon, SearchBar } from 'react-native-elements'
+import { SearchBar } from 'react-native-elements'
 
 // Navigation
 import { useNavigation } from '@react-navigation/native'
@@ -24,6 +24,7 @@ import { setProductsData } from '../../../redux/slices/productsSlice'
 
 // Components
 import ProductCard from '../../../components/ProductCard/ProductCard'
+import Loading from '../../../common/components/Loading/Loading'
 
 export default function HomeScreen() {
 
@@ -47,8 +48,7 @@ export default function HomeScreen() {
             E-Market
           </Text>
         </View>
-      ),
-
+      )
     })
   }, [navigation])
 
@@ -59,7 +59,7 @@ export default function HomeScreen() {
       .then(response => response.json())
       .then(json => dispatch(setProductsData(json)))
 
-  }, [])
+  }, [products])
 
   useEffect(() => {
     setData(products)
@@ -91,99 +91,111 @@ export default function HomeScreen() {
 
   return (
 
-    <VStack style={{ flex: 1, backgroundColor: "#FFFFFF" }}>
+    // data === null ?
 
-      <VStack style={{ borderBottomColor: "#F2F2F2", borderBottomWidth: 1 }}>
-        <SearchBar
-          placeholder="Search"
-          theme="light"
-          platform={Platform.OS === 'ios' ? 'ios' : 'android'}
-          inputContainerStyle={{ backgroundColor: "rgba(118, 118, 128, 0.12)", height: 34 }}
-          searchIcon={{ color: "#3C3C43" }}
-          onChangeText={updateSearch}
-          value={search}
-        />
-      </VStack>
-
+    //   <Loading />
+    //   :
       <VStack
         style={{
-          paddingHorizontal: 16,
-          marginTop: 19,
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center"
+          flex: 1,
+          backgroundColor: "#FFFFFF"
         }}>
 
-        <Text
+        <VStack
           style={{
-            fontSize: 18,
-            lineHeight: 21.94,
+            borderBottomColor: "#F2F2F2",
+            borderBottomWidth: 1
+          }}>
+          <SearchBar
+            placeholder="Search"
+            theme="light"
+            platform={Platform.OS === 'ios' ? 'ios' : 'android'}
+            inputContainerStyle={{ backgroundColor: "rgba(118, 118, 128, 0.12)", height: 34 }}
+            searchIcon={{ color: "#3C3C43" }}
+            onChangeText={updateSearch}
+            value={search}
+          />
+        </VStack>
+
+        <VStack
+          style={{
+            paddingHorizontal: 16,
+            marginTop: 19,
+            flexDirection: "row",
+            justifyContent: "space-between",
             alignItems: "center"
           }}>
-          Filters:
-        </Text>
 
-        <TouchableOpacity
-          style={{
-            padding: 10,
-            borderRadius: 8,
-            backgroundColor: "#D9D9D9",
-            width: 158,
-            height: 36,
-            alignItems: "center"
-          }}
-          activeOpacity={0.9}
-        >
           <Text
             style={{
-              fontSize: 14
-              , lineHeight: 17.07,
-              textAlignVertical: "center",
-              color: "#000000"
-            }}
-          >Select Filter
+              fontSize: 18,
+              lineHeight: 21.94,
+              alignItems: "center"
+            }}>
+            Filters:
           </Text>
 
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              padding: 10,
+              borderRadius: 8,
+              backgroundColor: "#D9D9D9",
+              width: 158,
+              height: 36,
+              alignItems: "center"
+            }}
+            activeOpacity={0.9}
+          >
+            <Text
+              style={{
+                fontSize: 14
+                , lineHeight: 17.07,
+                textAlignVertical: "center",
+                color: "#000000"
+              }}
+            >Select Filter
+            </Text>
+
+          </TouchableOpacity>
+        </VStack>
+
+        <FlatList
+          contentContainerStyle={{
+            paddingTop: 15,
+            paddingBottom: 40,
+            width: screenWidth
+          }}
+          numColumns={2}
+          data={data}
+
+          renderItem={({ item }) => {
+            return (
+              <KeyboardAvoidingView
+                keyboardVerticalOffset={350}
+                behavior={"position"}
+              >
+                <ProductCard
+                  product={item}
+                  isProductsContent={true}
+                  style={{
+                    marginLeft: 16,
+                    width: screenWidth / 2 - 24,
+                    marginBottom: 15,
+                  }}
+                  products={data}
+
+                />
+              </KeyboardAvoidingView>
+            )
+          }}
+
+          keyExtractor={item => item.id}
+          ListFooterComponent={renderLoader}
+        // onEndReached={loadMoreItem}
+        // onEndReachedThreshold={0}
+
+        />
+
       </VStack>
-
-      <FlatList
-        contentContainerStyle={{
-          paddingTop: 15,
-          paddingBottom: 40,
-          width: screenWidth
-        }}
-        numColumns={2}
-        data={data}
-
-        renderItem={({ item }) => {
-          return (
-            <KeyboardAvoidingView
-              keyboardVerticalOffset={350}
-              behavior={"position"}
-            >
-              <ProductCard
-                product={item}
-                isProductsContent={true}
-                style={{
-                  marginLeft: 16,
-                  width: screenWidth / 2 - 24,
-                  marginBottom: 15,
-                }}
-                products={data}
-
-              />
-            </KeyboardAvoidingView>
-          )
-        }}
-
-        keyExtractor={item => item.id}
-        ListFooterComponent={renderLoader}
-      // onEndReached={loadMoreItem}
-      // onEndReachedThreshold={0}
-
-      />
-
-    </VStack>
   )
 }
